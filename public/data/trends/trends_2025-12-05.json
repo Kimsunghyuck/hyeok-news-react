@@ -1,0 +1,220 @@
+{
+  "date": "2025-12-05",
+  "generated_at": "2025-12-05T19:11:30.441230+09:00",
+  "daily_top_keywords": [
+    {
+      "word": "서울",
+      "count": 9
+    },
+    {
+      "word": "한국",
+      "count": 7
+    },
+    {
+      "word": "의혹",
+      "count": 6
+    },
+    {
+      "word": "논란",
+      "count": 5
+    },
+    {
+      "word": "억원",
+      "count": 5
+    },
+    {
+      "word": "대통령",
+      "count": 5
+    },
+    {
+      "word": "수도권",
+      "count": 5
+    },
+    {
+      "word": "경찰",
+      "count": 5
+    },
+    {
+      "word": "남자",
+      "count": 5
+    },
+    {
+      "word": "계약",
+      "count": 5
+    },
+    {
+      "word": "최초",
+      "count": 5
+    },
+    {
+      "word": "개최",
+      "count": 4
+    },
+    {
+      "word": "개월",
+      "count": 4
+    },
+    {
+      "word": "국민",
+      "count": 4
+    },
+    {
+      "word": "정부",
+      "count": 4
+    },
+    {
+      "word": "친윤",
+      "count": 4
+    },
+    {
+      "word": "윤한홍",
+      "count": 4
+    },
+    {
+      "word": "장동혁",
+      "count": 4
+    },
+    {
+      "word": "계엄",
+      "count": 4
+    },
+    {
+      "word": "논의",
+      "count": 4
+    }
+  ],
+  "category_keywords": {
+    "politics": [
+      {
+        "word": "대통령",
+        "count": 5
+      },
+      {
+        "word": "정부",
+        "count": 4
+      },
+      {
+        "word": "친윤",
+        "count": 4
+      },
+      {
+        "word": "윤한홍",
+        "count": 4
+      },
+      {
+        "word": "장동혁",
+        "count": 4
+      }
+    ],
+    "sports": [
+      {
+        "word": "남자",
+        "count": 5
+      },
+      {
+        "word": "계약",
+        "count": 5
+      },
+      {
+        "word": "한국",
+        "count": 4
+      },
+      {
+        "word": "최초",
+        "count": 4
+      },
+      {
+        "word": "우승",
+        "count": 3
+      }
+    ],
+    "economy": [
+      {
+        "word": "스타링크",
+        "count": 3
+      },
+      {
+        "word": "청년",
+        "count": 2
+      },
+      {
+        "word": "그룹",
+        "count": 2
+      },
+      {
+        "word": "산업부",
+        "count": 2
+      },
+      {
+        "word": "반도체",
+        "count": 2
+      }
+    ],
+    "society": [
+      {
+        "word": "경찰",
+        "count": 5
+      },
+      {
+        "word": "서울",
+        "count": 3
+      },
+      {
+        "word": "수능",
+        "count": 3
+      },
+      {
+        "word": "조희대",
+        "count": 3
+      },
+      {
+        "word": "만에",
+        "count": 3
+      }
+    ],
+    "international": [
+      {
+        "word": "트럼프",
+        "count": 3
+      },
+      {
+        "word": "논란",
+        "count": 3
+      },
+      {
+        "word": "억만장자",
+        "count": 2
+      },
+      {
+        "word": "의회",
+        "count": 2
+      },
+      {
+        "word": "사체",
+        "count": 2
+      }
+    ],
+    "culture": [
+      {
+        "word": "데뷔",
+        "count": 3
+      },
+      {
+        "word": "정국",
+        "count": 2
+      },
+      {
+        "word": "에스파",
+        "count": 2
+      },
+      {
+        "word": "윈터",
+        "count": 2
+      },
+      {
+        "word": "마동석",
+        "count": 2
+      }
+    ]
+  }
+}

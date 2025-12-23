@@ -1,0 +1,54 @@
+name: Crawl News to Supabase
+
+on:
+  schedule:
+    # 하루 3번 실행 (KST 09:00, 15:00, 19:00)
+    - cron: '0 0 * * *'   # 00:00 UTC = 09:00 KST
+    - cron: '0 6 * * *'   # 06:00 UTC = 15:00 KST
+    - cron: '0 10 * * *'  # 10:00 UTC = 19:00 KST
+
+  # 수동 실행 옵션
+  workflow_dispatch:
+    inputs:
+      test_mode:
+        description: '테스트 모드 (소량 크롤링)'
+        required: false
+        default: 'false'
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+
+      - name: 🔍 Run crawler and save to Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          cd backend
+          python crawler.py
+
+      - name: 📊 Summary
+        if: always()
+        run: |
+          echo "✅ Crawling completed at $(date '+%Y-%m-%d %H:%M:%S KST')"
+          echo "Check Supabase dashboard for results"
+
+      - name: ❌ Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Crawling failed! Check logs for details."

@@ -1,0 +1,220 @@
+{
+  "date": "2025-12-12",
+  "generated_at": "2025-12-12T19:12:16.661743+09:00",
+  "daily_top_keywords": [
+    {
+      "word": "사과",
+      "count": 9
+    },
+    {
+      "word": "국힘",
+      "count": 9
+    },
+    {
+      "word": "통일교",
+      "count": 8
+    },
+    {
+      "word": "대통령",
+      "count": 8
+    },
+    {
+      "word": "만에",
+      "count": 8
+    },
+    {
+      "word": "한국",
+      "count": 7
+    },
+    {
+      "word": "결국",
+      "count": 7
+    },
+    {
+      "word": "동맹",
+      "count": 7
+    },
+    {
+      "word": "주사이모",
+      "count": 6
+    },
+    {
+      "word": "출신",
+      "count": 6
+    },
+    {
+      "word": "머스크",
+      "count": 6
+    },
+    {
+      "word": "남자",
+      "count": 6
+    },
+    {
+      "word": "폰세",
+      "count": 6
+    },
+    {
+      "word": "트럼프",
+      "count": 6
+    },
+    {
+      "word": "보고",
+      "count": 5
+    },
+    {
+      "word": "사장",
+      "count": 5
+    },
+    {
+      "word": "추진",
+      "count": 5
+    },
+    {
+      "word": "가족",
+      "count": 5
+    },
+    {
+      "word": "남긴",
+      "count": 5
+    },
+    {
+      "word": "서울대",
+      "count": 4
+    }
+  ],
+  "category_keywords": {
+    "politics": [
+      {
+        "word": "국힘",
+        "count": 9
+      },
+      {
+        "word": "대통령",
+        "count": 7
+      },
+      {
+        "word": "사과",
+        "count": 5
+      },
+      {
+        "word": "통일교",
+        "count": 4
+      },
+      {
+        "word": "대장동",
+        "count": 4
+      }
+    ],
+    "sports": [
+      {
+        "word": "남자",
+        "count": 6
+      },
+      {
+        "word": "한국",
+        "count": 6
+      },
+      {
+        "word": "폰세",
+        "count": 6
+      },
+      {
+        "word": "연패",
+        "count": 4
+      },
+      {
+        "word": "우승",
+        "count": 4
+      }
+    ],
+    "economy": [
+      {
+        "word": "동맹",
+        "count": 6
+      },
+      {
+        "word": "머스크",
+        "count": 6
+      },
+      {
+        "word": "만에",
+        "count": 4
+      },
+      {
+        "word": "등장한",
+        "count": 4
+      },
+      {
+        "word": "포드와",
+        "count": 3
+      }
+    ],
+    "society": [
+      {
+        "word": "비결",
+        "count": 4
+      },
+      {
+        "word": "붕괴",
+        "count": 3
+      },
+      {
+        "word": "매몰자",
+        "count": 3
+      },
+      {
+        "word": "통일교",
+        "count": 3
+      },
+      {
+        "word": "년간",
+        "count": 3
+      }
+    ],
+    "international": [
+      {
+        "word": "트럼프",
+        "count": 6
+      },
+      {
+        "word": "징역",
+        "count": 4
+      },
+      {
+        "word": "선고",
+        "count": 4
+      },
+      {
+        "word": "지진",
+        "count": 4
+      },
+      {
+        "word": "망쳤다",
+        "count": 4
+      }
+    ],
+    "culture": [
+      {
+        "word": "보고",
+        "count": 5
+      },
+      {
+        "word": "주사이모",
+        "count": 5
+      },
+      {
+        "word": "사과",
+        "count": 4
+      },
+      {
+        "word": "김지미",
+        "count": 4
+      },
+      {
+        "word": "친분설",
+        "count": 4
+      }
+    ]
+  }
+}

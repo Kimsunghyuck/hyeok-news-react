@@ -1,0 +1,220 @@
+{
+  "date": "2025-12-07",
+  "generated_at": "2025-12-07T19:11:27.994813+09:00",
+  "daily_top_keywords": [
+    {
+      "word": "조진웅",
+      "count": 11
+    },
+    {
+      "word": "만원",
+      "count": 9
+    },
+    {
+      "word": "박나래",
+      "count": 7
+    },
+    {
+      "word": "논란",
+      "count": 7
+    },
+    {
+      "word": "의혹",
+      "count": 6
+    },
+    {
+      "word": "쿠팡",
+      "count": 6
+    },
+    {
+      "word": "국힘",
+      "count": 5
+    },
+    {
+      "word": "통일교",
+      "count": 5
+    },
+    {
+      "word": "범죄",
+      "count": 4
+    },
+    {
+      "word": "대변인",
+      "count": 4
+    },
+    {
+      "word": "감사원장",
+      "count": 4
+    },
+    {
+      "word": "김호철",
+      "count": 4
+    },
+    {
+      "word": "내란재판부",
+      "count": 4
+    },
+    {
+      "word": "강훈식",
+      "count": 4
+    },
+    {
+      "word": "추경호",
+      "count": 4
+    },
+    {
+      "word": "기소",
+      "count": 4
+    },
+    {
+      "word": "국민연금",
+      "count": 4
+    },
+    {
+      "word": "멕시코",
+      "count": 4
+    },
+    {
+      "word": "유럽",
+      "count": 4
+    },
+    {
+      "word": "레이더",
+      "count": 4
+    }
+  ],
+  "category_keywords": {
+    "politics": [
+      {
+        "word": "국힘",
+        "count": 5
+      },
+      {
+        "word": "통일교",
+        "count": 5
+      },
+      {
+        "word": "감사원장",
+        "count": 4
+      },
+      {
+        "word": "김호철",
+        "count": 4
+      },
+      {
+        "word": "내란재판부",
+        "count": 4
+      }
+    ],
+    "sports": [
+      {
+        "word": "경기",
+        "count": 2
+      },
+      {
+        "word": "토트넘",
+        "count": 2
+      },
+      {
+        "word": "남자",
+        "count": 2
+      },
+      {
+        "word": "한국",
+        "count": 2
+      },
+      {
+        "word": "멕시코",
+        "count": 2
+      }
+    ],
+    "economy": [
+      {
+        "word": "만원",
+        "count": 4
+      },
+      {
+        "word": "쿠팡",
+        "count": 3
+      },
+      {
+        "word": "조원",
+        "count": 2
+      },
+      {
+        "word": "버블",
+        "count": 2
+      },
+      {
+        "word": "걱정",
+        "count": 2
+      }
+    ],
+    "society": [
+      {
+        "word": "박나래",
+        "count": 4
+      },
+      {
+        "word": "부부",
+        "count": 3
+      },
+      {
+        "word": "추경호",
+        "count": 3
+      },
+      {
+        "word": "불구속",
+        "count": 3
+      },
+      {
+        "word": "기소",
+        "count": 3
+      }
+    ],
+    "international": [
+      {
+        "word": "레이더",
+        "count": 4
+      },
+      {
+        "word": "국방",
+        "count": 3
+      },
+      {
+        "word": "만원",
+        "count": 3
+      },
+      {
+        "word": "전투기",
+        "count": 3
+      },
+      {
+        "word": "유럽",
+        "count": 3
+      }
+    ],
+    "culture": [
+      {
+        "word": "조진웅",
+        "count": 5
+      },
+      {
+        "word": "박나래",
+        "count": 3
+      },
+      {
+        "word": "사생활",
+        "count": 3
+      },
+      {
+        "word": "은퇴",
+        "count": 2
+      },
+      {
+        "word": "최초",
+        "count": 2
+      }
+    ]
+  }
+}

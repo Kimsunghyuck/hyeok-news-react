@@ -1,0 +1,2143 @@
+/* 
+ * Hyeok Crawler - 메인 스타일시트
+ * 참고: HS Hyosung Advanced Materials 웹사이트 디자인
+ */
+
+/* ===== Reset & Base Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colors - Light Mode */
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --border-color: #e1e8ed;
+    --nav-bg: #ffffff;
+    --nav-text: #333333;
+    --card-bg: #ffffff;
+    --footer-bg: #ffffff;
+    --ticker-bg-start: #2c3e50;
+    --ticker-bg-end: #1a252f;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+    
+    /* Typography */
+    --font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    --primary-color: #e8eaed;
+    --text-primary: #e8eaed;
+    --text-secondary: #9aa0a6;
+    --bg-light: #1a1a1a;
+    --bg-white: #2d2d2d;
+    --border-color: #3c4043;
+    --nav-bg: #2d2d2d;
+    --nav-text: #e8eaed;
+    --card-bg: #2d2d2d;
+    --footer-bg: #2d2d2d;
+    --ticker-bg-start: #1a1a1a;
+    --ticker-bg-end: #0d0d0d;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-primary);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ===== Navigation Styles ===== */
+.main-navigation {
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    position: relative;
+}
+
+/* Logo Styles */
+.site-logo {
+    position: absolute;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    transition: opacity 0.3s ease;
+}
+
+.site-logo:hover {
+    opacity: 0.75;
+}
+
+.site-logo img {
+    height: 36px;
+    width: auto;
+    transition: filter 0.3s ease;
+    mix-blend-mode: multiply;
+    /* 회색 배경을 투명하게 처리 */
+}
+
+/* Dark Mode - Invert logo colors */
+[data-theme="dark"] .site-logo img {
+    filter: invert(1) brightness(1.1);
+    mix-blend-mode: screen;
+    /* 다크모드에서는 screen 모드로 전환 */
+}
+
+.logo-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--nav-text);
+    white-space: nowrap;
+}
+
+/* Action Buttons Group */
+.nav-actions {
+    position: absolute;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--bg-light);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg) scale(1.1);
+    border-color: #00ff88;
+}
+
+.theme-toggle .sun-icon {
+    display: none;
+    color: var(--text-primary);
+}
+
+.theme-toggle .moon-icon {
+    display: block;
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+    display: none;
+}
+
+/* Trend Button */
+.trend-btn {
+    background: var(--bg-light);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    color: var(--text-primary);
+    position: relative;
+}
+
+.trend-btn svg {
+    stroke: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.trend-btn:hover {
+    transform: scale(1.1);
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.trend-btn:hover svg {
+    stroke: #fff;
+}
+
+.trend-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.35rem;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.trend-badge.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Logout Button */
+.logout-btn {
+    background: var(--bg-light);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    color: var(--text-primary);
+    position: relative;
+}
+
+.logout-btn svg {
+    stroke: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    transform: scale(1.1);
+    border-color: #ef4444;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.logout-btn:hover svg {
+    stroke: #fff;
+}
+
+/* Tooltips for all action buttons */
+.nav-actions button[data-tooltip] {
+    position: relative;
+}
+
+.nav-actions button[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.nav-actions button[data-tooltip]::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 1001;
+}
+
+.nav-actions button[data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-actions button[data-tooltip]:hover::before {
+    opacity: 1;
+}
+
+/* Dark mode tooltip */
+[data-theme="dark"] .nav-actions button[data-tooltip]::after {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1a202c;
+}
+
+[data-theme="dark"] .nav-actions button[data-tooltip]::before {
+    border-bottom-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Bookmark Page Button */
+.bookmark-page-btn {
+    background: var(--bg-light);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    color: var(--text-primary);
+    position: relative;
+}
+
+.bookmark-page-btn svg {
+    stroke: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.bookmark-page-btn:hover {
+    transform: scale(1.1);
+    border-color: #FFD700;
+    background: #FFD700;
+    color: #fff;
+}
+
+.bookmark-page-btn:hover svg {
+    stroke: #fff;
+}
+
+.bookmark-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #e74c3c;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.15rem 0.4rem;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+.categories {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+
+.category-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.category-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1.8rem 2.5rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--nav-text);
+    position: relative;
+    user-select: none;
+    letter-spacing: 0.5px;
+}
+
+.category-item:hover .category-title,
+.category-item.hover .category-title {
+    color: #00ff88;
+    transform: translateY(-2px);
+    font-weight: 600;
+}
+
+/* Shared Dropdown Menu */
+.shared-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    border-top: 3px solid #00ff88;
+    border-radius: 8px;
+    min-width: 280px;
+    margin-top: 0.5rem;
+}
+
+.categories:hover ~ .shared-dropdown,
+.shared-dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.source-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.source-item {
+    display: block;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--nav-text);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.source-item:last-child {
+    border-bottom: none;
+}
+
+.source-item:hover {
+    background: var(--bg-light);
+    color: #00ff88;
+}
+
+.source-item.active {
+    background: var(--bg-light);
+    color: #00ff88;
+    font-weight: 700;
+}
+
+.source-item span {
+    font-weight: 600;
+    display: block;
+}
+
+/* ===== News Ticker Banner ===== */
+.news-ticker-banner {
+    background: linear-gradient(135deg, var(--ticker-bg-start) 0%, var(--ticker-bg-end) 100%);
+    padding: 0.8rem 0;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.5);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.news-ticker-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.news-ticker-swiper {
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+}
+
+.news-ticker-swiper .swiper-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.news-ticker-swiper .swiper-slide {
+    width: 100% !important;
+    flex-shrink: 0;
+}
+
+.ticker-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    min-height: 50px;
+}
+
+.ticker-item:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.ticker-category {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.9rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ticker-category.politics {
+    background: #3498db;
+    color: white;
+}
+
+.ticker-category.sports {
+    background: #e74c3c;
+    color: white;
+}
+
+.ticker-category.economy {
+    background: #27ae60;
+    color: white;
+}
+
+.ticker-category.society {
+    background: #9b59b6;
+    color: white;
+}
+
+.ticker-category.international {
+    background: #fa11b4;
+    color: white;
+}
+
+.ticker-category.culture {
+    background: #ffde0b;
+    color: #333333;
+}
+
+.ticker-title {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: normal;
+    line-height: 1.5;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* 트렌드 키워드 티커 스타일 (사용 안 함 - 옵션3) */
+
+/* 트렌드 키워드 티커 스타일 (사용 안 함 - 옵션3) */
+
+/* 트렌드 패널 오버레이 */
+.trend-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.trend-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Trend Panel Tabs */
+.trend-tabs {
+    display: flex;
+    background: var(--bg-secondary);
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.trend-tab {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.trend-tab:hover {
+    background: var(--card-hover-bg);
+    color: var(--text-primary);
+}
+
+.trend-tab.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Statistics Dashboard Styles */
+.stats-overview {
+    margin-bottom: 2rem;
+}
+
+.stats-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.chart-container {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    height: 300px;
+}
+
+.chart-container canvas {
+    max-height: 100%;
+}
+
+/* 트렌드 패널 */
+.trend-panel {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    height: 100vh;
+    background: var(--card-bg);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 2001;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.trend-panel.active {
+    right: 0;
+}
+
+.trend-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trend-panel-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.trend-close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.trend-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.trend-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.trend-section {
+    margin-bottom: 2rem;
+}
+
+.trend-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* 전체 키워드 리스트 */
+.trend-keywords-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.trend-keyword-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.trend-keyword-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trend-rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.trend-word {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.trend-count-badge {
+    padding: 0.3rem 0.8rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* 카테고리별 키워드 */
+.trend-categories {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.trend-category-box {
+    background: var(--bg-light);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.trend-category-box h4.category-badge {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-keywords-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.category-keyword {
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.category-keyword small {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.trend-empty, .trend-error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .trend-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .trend-btn span {
+        display: none;
+    }
+}
+
+/* ===== Banner Section ===== */
+/* ===== News Section ===== */
+.news-section {
+    padding: var(--spacing-lg) 0;
+    min-height: 100vh;
+}
+
+.date-selector-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease;
+}
+
+.news-source-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.news-source-title h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.news-source-title img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 8px;
+    order: 0;
+}
+
+.category-label {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    color: white;
+    letter-spacing: 0.3px;
+}
+
+.category-label.politics {
+    background-color: #3498db;
+}
+
+.category-label.sports {
+    background-color: #e74c3c;
+}
+
+.category-label.economy {
+    background-color: #27ae60;
+}
+
+.category-label.society {
+    background-color: #9b59b6;
+}
+
+.category-label.international {
+    background-color: #fa11b4;
+}
+
+.category-label.culture {
+    background-color: #ffde0b;
+}
+
+.date-selector-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.date-selector-wrapper label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.date-selector-wrapper input[type="date"] {
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--bg-light);
+    color: var(--text-primary);
+}
+
+/* 날짜 선택 아이콘 스타일 */
+.date-selector-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.date-selector-wrapper input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+/* 다크모드에서 날짜 선택 아이콘 밝게 */
+[data-theme="dark"] .date-selector-wrapper input[type="date"] {
+    color-scheme: dark;
+    background: var(--bg-white);
+}
+
+[data-theme="dark"] .date-selector-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(2);
+    cursor: pointer;
+    opacity: 1;
+}
+
+/* Firefox용 날짜 선택 아이콘 */
+[data-theme="dark"] .date-selector-wrapper input[type="date"]::-moz-calendar-picker-indicator {
+    filter: invert(1) brightness(2);
+    cursor: pointer;
+    opacity: 1;
+}
+
+.date-selector-wrapper input[type="date"]:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* ===== News Grid ===== */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.news-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Bookmark Button in Card */
+.bookmark-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.bookmark-btn:hover {
+    transform: scale(1.15) rotate(10deg);
+    background: #FFD700;
+}
+
+.bookmark-btn .bookmark-icon {
+    fill: none;
+    stroke: #666;
+    transition: all 0.3s ease;
+}
+
+.bookmark-btn:hover .bookmark-icon {
+    stroke: #FFD700;
+}
+
+.bookmark-btn.bookmarked {
+    background: #FFD700;
+    animation: bookmarkPulse 0.4s ease;
+}
+
+@keyframes bookmarkPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.bookmark-btn.bookmarked .bookmark-icon {
+    fill: #FFD700;
+    stroke: #FFF;
+}
+
+[data-theme="dark"] .bookmark-btn {
+    background: rgba(45, 45, 45, 0.95);
+}
+
+[data-theme="dark"] .bookmark-btn .bookmark-icon {
+    stroke: #9aa0a6;
+}
+
+[data-theme="dark"] .bookmark-btn:hover .bookmark-icon {
+    stroke: #FFD700;
+}
+
+[data-theme="dark"] .bookmark-btn.bookmarked {
+    background: #FFD700;
+}
+
+[data-theme="dark"] .bookmark-btn.bookmarked .bookmark-icon {
+    fill: #FFD700;
+    stroke: #FFF;
+}
+
+/* Share Button in Card */
+.share-btn {
+    position: absolute;
+    top: 10px;
+    right: 55px; /* 북마크 버튼 옆 */
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.share-btn:hover {
+    transform: scale(1.15);
+    background: #00D9FF;
+}
+
+.share-btn .share-icon {
+    stroke: #666;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover .share-icon {
+    stroke: #FFF;
+}
+
+.share-btn:active {
+    animation: sharePulse 0.4s ease;
+}
+
+@keyframes sharePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+[data-theme="dark"] .share-btn {
+    background: rgba(45, 45, 45, 0.95);
+}
+
+[data-theme="dark"] .share-btn .share-icon {
+    stroke: #9aa0a6;
+}
+
+[data-theme="dark"] .share-btn:hover {
+    background: #00D9FF;
+}
+
+[data-theme="dark"] .share-btn:hover .share-icon {
+    stroke: #FFF;
+}
+
+.news-card-image-wrapper {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    background: var(--bg-light);
+    overflow: hidden;
+}
+
+.news-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-card-no-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    color: var(--text-secondary);
+}
+
+.news-card-no-image svg {
+    opacity: 0.4;
+}
+
+.news-card-no-image span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.6;
+}
+
+.news-card-content {
+    padding: var(--spacing-sm);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.news-card-category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* 카테고리별 배경색 */
+.news-card-category.politics {
+    background-color: #3498db;
+}
+
+.news-card-category.sports {
+    background-color: #e74c3c;
+}
+
+.news-card-category.economy {
+    background-color: #27ae60;
+}
+
+.news-card-category.society {
+    background-color: #9b59b6;
+}
+
+.news-card-category.international {
+    background-color: #fa11b4;
+}
+
+.news-card-category.culture {
+    background-color: #ffde0b;
+    color: #333333;
+}
+
+.news-card-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.news-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--text-primary);
+}
+
+.news-card-source {
+    display: none;
+}
+
+/* ===== Bookmark Modal ===== */
+.bookmark-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.bookmark-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.bookmark-modal-content {
+    background: var(--card-bg);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 1200px;
+    max-height: 85vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.4s ease;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.bookmark-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.bookmark-modal-header h2 {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.close-modal-btn:hover {
+    transform: rotate(90deg);
+    color: #e74c3c;
+}
+
+.bookmark-modal-body {
+    padding: var(--spacing-md);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.bookmark-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.bookmark-empty-state svg {
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+.bookmark-empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.bookmark-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Toast Message */
+.toast-message {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    z-index: 3000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="dark"] .toast-message {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+/* ===== Loading & States ===== */
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    margin-top: var(--spacing-sm);
+    color: var(--text-secondary);
+}
+
+.error-message,
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--bg-white);
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin: var(--spacing-lg) 0;
+}
+
+.empty-state-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.empty-state-content svg {
+    color: var(--text-secondary);
+    opacity: 0.5;
+    margin-bottom: var(--spacing-sm);
+}
+
+.empty-state-content h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-content p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.error-message p,
+.empty-state p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* ===== Footer Styles ===== */
+.site-footer {
+    background: var(--footer-bg);
+    color: var(--text-primary);
+    padding: var(--spacing-lg) 0 var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-lg);
+}
+
+.footer-logo img {
+    height: 40px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.copyright {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.link-group h4 {
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.1rem;
+}
+
+.link-group ul {
+    list-style: none;
+}
+
+.link-group li {
+    margin-bottom: 0.5rem;
+}
+
+.link-group a {
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.link-group a:hover {
+    color: #00ff88;
+    padding-left: 5px;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+    .category-title {
+        padding: 1.5rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .news-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    /* 네비게이션 세로 배치 시작 */
+    .nav-content {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+    }
+    
+    .nav-logo {
+        position: static;
+        width: 100%;
+        text-align: center;
+        padding: var(--spacing-sm);
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .nav-logo img {
+        margin: 0 auto;
+    }
+    
+    .categories {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .category-title {
+        padding: 1.2rem 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    .shared-dropdown {
+        left: 50%;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* 모바일에서 카테고리도 세로 배치 */
+    .categories {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .category-item {
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .category-item:last-child {
+        border-bottom: none;
+    }
+    
+    .category-title {
+        padding: 1.2rem;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .shared-dropdown {
+        position: static;
+        transform: none;
+        margin-top: 0;
+        border-radius: 0;
+        border-top: none;
+        border-left: 3px solid #00ff88;
+        background: var(--bg-light);
+        display: none;
+    }
+    
+    .category-item:hover .shared-dropdown,
+    .category-item.active .shared-dropdown {
+        display: block;
+    }
+    
+    .source-item {
+        text-align: left;
+        padding: 0.8rem 2rem;
+    }
+    
+    /* 티커 모바일 스타일 */
+    .ticker-category {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+    }
+    
+    .ticker-title {
+        font-size: 0.85rem;
+    }
+    
+    .ticker-item {
+        padding: 0 1rem;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 액션 버튼 그룹 모바일 위치 조정 */
+    .nav-actions {
+        position: static;
+        margin: 1rem auto;
+        justify-content: center;
+    }
+    
+    /* 북마크 모달 모바일 */
+    .bookmark-modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .bookmark-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .news-card-title {
+        font-size: 1rem;
+    }
+    
+    .bookmark-modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .bookmark-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .share-btn {
+        width: 35px;
+        height: 35px;
+        right: 45px;
+    }
+}
+
+/* ===== Home Dashboard Styles ===== */
+.home-dashboard {
+    padding: var(--spacing-lg) 0;
+    min-height: 80vh;
+}
+
+.home-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.home-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.home-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.home-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.home-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* 신문사별 비교 그리드 */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.comparison-column {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: var(--spacing-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.comparison-header img {
+    height: 24px;
+    width: auto;
+}
+
+.comparison-header h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.comparison-article {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-article:last-child {
+    border-bottom: none;
+}
+
+.comparison-article-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+/* 카테고리별 색상 */
+.comparison-article-category.politics {
+    background-color: #3498db;
+    color: white;
+}
+
+.comparison-article-category.sports {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.comparison-article-category.economy {
+    background-color: #27ae60;
+    color: white;
+}
+
+.comparison-article-category.society {
+    background-color: #9b59b6;
+    color: white;
+}
+
+.comparison-article-category.international {
+    background-color: #fa11b4;
+    color: white;
+}
+
+.comparison-article-category.culture {
+    background-color: #ffde0b;
+    color: #333333;
+}
+
+.comparison-article-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin-bottom: 0.3rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.comparison-article-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.comparison-no-data {
+    padding: 2rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    background: var(--bg-light);
+    border-radius: 12px;
+    margin: 1rem 0;
+}
+
+@media (max-width: 968px) {
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-header h1 {
+        font-size: 2rem;
+    }
+}
+
+/* ===== Skeleton Loading UI ===== */
+.skeleton {
+    background: linear-gradient(90deg,
+        var(--border-color) 25%,
+        var(--bg-light) 50%,
+        var(--border-color) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-column {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.skeleton-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.skeleton-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.skeleton-title {
+    width: 120px;
+    height: 24px;
+}
+
+.skeleton-article {
+    margin-bottom: 1rem;
+    padding: 0.75rem 0;
+}
+
+.skeleton-category {
+    width: 60px;
+    height: 20px;
+    margin-bottom: 0.5rem;
+    border-radius: 12px;
+}
+
+.skeleton-article-title {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 0.3rem;
+}
+
+.skeleton-article-title-2 {
+    width: 80%;
+    height: 16px;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-time {
+    width: 50px;
+    height: 14px;
+}
+
+/* ===== Authentication Landing Page ===== */
+.auth-landing {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    overflow: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.auth-landing.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.auth-container {
+    background: var(--bg-white);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+}
+
+.auth-logo {
+    margin-bottom: 2rem;
+}
+
+.auth-logo img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.auth-logo h1 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Auth Main */
+.auth-main {
+    margin: 2rem 0;
+}
+
+/* Google Sign-in Button */
+.google-signin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    background: white;
+    border: 2px solid #dadce0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #3c4043;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.google-signin-btn:hover {
+    background: #f8f9fa;
+    border-color: #d2d3d4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.google-signin-btn:active {
+    background: #f1f3f4;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.google-signin-btn svg {
+    flex-shrink: 0;
+}
+
+.auth-notice {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Auth Loading */
+.auth-loading {
+    display: none;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.auth-loading.active {
+    display: block;
+}
+
+.auth-spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 1rem;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#auth-loading-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Auth Error */
+.auth-error {
+    display: none;
+    background: #ffe6e6;
+    color: #c0392b;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+[data-theme="dark"] .auth-error {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.auth-error.active {
+    display: block;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .auth-logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .google-signin-btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.95rem;
+    }
+}
