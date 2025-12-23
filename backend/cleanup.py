@@ -26,7 +26,7 @@ def main():
 
     # 30일 이상 된 뉴스 삭제
     print("🗑️  30일 이상 된 뉴스 삭제 중...")
-    deleted_count = delete_old_news(days=0)
+    deleted_count = delete_old_news(days=-1)
 
     # 정리 후 데이터 개수 확인
     after_count = get_total_news_count()
