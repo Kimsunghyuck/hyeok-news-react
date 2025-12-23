@@ -41,43 +41,56 @@ function App() {
 
   const loadTickerNews = async () => {
     try {
-      // Supabase에서 최근 뉴스 가져오기 (카테고리/신문사 상관없이)
-      const { data, error } = await supabase
-        .from('news')
-        .select('*')
-        .order('scraped_at', { ascending: false })
-        .limit(15)
+      const categories = ['politics', 'economy', 'society', 'international', 'culture', 'sports']
+      const allNews: NewsItem[] = []
 
-      if (error) {
-        console.error('티커 뉴스 로드 실패:', error)
-        return
-      }
+      // 각 카테고리에서 최신 뉴스 2-3개씩 가져오기
+      for (const category of categories) {
+        const { data, error } = await supabase
+          .from('news')
+          .select('*')
+          .eq('category_en', category)
+          .order('scraped_at', { ascending: false })
+          .limit(3)
 
-      if (data && data.length > 0) {
-        type NewsRow = {
-          title: string
-          url: string
-          date: string
-          category: string
-          category_en: string | null
-          source: string
-          source_en: string | null
-          image_url: string | null
-          scraped_at: string
+        if (error) {
+          console.error(`티커 뉴스 로드 실패 (${category}):`, error)
+          continue
         }
-        const newsItems: NewsItem[] = (data as NewsRow[]).map(item => ({
-          title: item.title,
-          url: item.url,
-          date: item.date,
-          category: item.category,
-          category_en: item.category_en || undefined,
-          source: item.source,
-          source_en: item.source_en || undefined,
-          image_url: item.image_url || undefined,
-          scraped_at: item.scraped_at
-        }))
-        setTickerNews(newsItems)
+
+        if (data && data.length > 0) {
+          type NewsRow = {
+            title: string
+            url: string
+            date: string
+            category: string
+            category_en: string | null
+            source: string
+            source_en: string | null
+            image_url: string | null
+            scraped_at: string
+          }
+          const newsItems: NewsItem[] = (data as NewsRow[]).map(item => ({
+            title: item.title,
+            url: item.url,
+            date: item.date,
+            category: item.category,
+            category_en: item.category_en || undefined,
+            source: item.source,
+            source_en: item.source_en || undefined,
+            image_url: item.image_url || undefined,
+            scraped_at: item.scraped_at
+          }))
+          allNews.push(...newsItems)
+        }
       }
+
+      // 뉴스를 랜덤하게 섞기
+      const shuffled = allNews.sort(() => Math.random() - 0.5)
+
+      // 최대 15개만 사용
+      setTickerNews(shuffled.slice(0, 15))
+      console.log('✅ 티커 뉴스 로드 완료:', shuffled.length, '개 (카테고리별 랜덤)')
     } catch (error) {
       console.error('티커 뉴스 로드 실패:', error)
     }
