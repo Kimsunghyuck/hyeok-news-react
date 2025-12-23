@@ -17,13 +17,15 @@ import { useAuth } from './hooks/useAuth'
 import type { NewsItem, CategoryId, SourceId } from './types/news.types'
 import { CATEGORY_NAMES, SOURCE_NAMES } from './types/news.types'
 import images from './assets/images'
+import { getTodayKST } from './utils/date'
+import { supabase } from './config/supabase'
 
 function App() {
   // 화면 상태
   const [isHomeView, setIsHomeView] = useState(true)
   const [currentCategory, setCurrentCategory] = useState<CategoryId>('politics')
   const [currentSource, setCurrentSource] = useState<SourceId>('donga')
-  const [selectedDate, setSelectedDate] = useState('2025-12-19')
+  const [selectedDate, setSelectedDate] = useState(getTodayKST())
   const [tickerNews, setTickerNews] = useState<NewsItem[]>([])
   const [isBookmarkModalOpen, setIsBookmarkModalOpen] = useState(false)
 
@@ -39,32 +41,43 @@ function App() {
 
   const loadTickerNews = async () => {
     try {
-      const dateStr = '2025-12-19'
-      const categories = ['politics', 'economy', 'society', 'international', 'culture', 'sports']
-      const sources = ['donga', 'chosun', 'joongang']
-      const allNews: NewsItem[] = []
+      // Supabase에서 최근 뉴스 가져오기 (카테고리/신문사 상관없이)
+      const { data, error } = await supabase
+        .from('news')
+        .select('*')
+        .order('scraped_at', { ascending: false })
+        .limit(15)
 
-      // 각 카테고리/신문사에서 랜덤으로 뉴스 수집
-      for (const category of categories) {
-        for (const source of sources) {
-          try {
-            const response = await fetch(`/data/${category}/${source}/news_${dateStr}_09-00.json`)
-            if (response.ok) {
-              const data: NewsItem[] = await response.json()
-              if (data.length > 0) {
-                // 각 조합에서 1개씩만 가져오기
-                allNews.push(data[0])
-              }
-            }
-          } catch (error) {
-            // 개별 로드 실패는 무시
-          }
-        }
+      if (error) {
+        console.error('티커 뉴스 로드 실패:', error)
+        return
       }
 
-      // 배열을 섞어서 랜덤하게 표시
-      const shuffled = allNews.sort(() => Math.random() - 0.5)
-      setTickerNews(shuffled.slice(0, 15))  // 상위 15개
+      if (data && data.length > 0) {
+        type NewsRow = {
+          title: string
+          url: string
+          date: string
+          category: string
+          category_en: string | null
+          source: string
+          source_en: string | null
+          image_url: string | null
+          scraped_at: string
+        }
+        const newsItems: NewsItem[] = (data as NewsRow[]).map(item => ({
+          title: item.title,
+          url: item.url,
+          date: item.date,
+          category: item.category,
+          category_en: item.category_en || undefined,
+          source: item.source,
+          source_en: item.source_en || undefined,
+          image_url: item.image_url || undefined,
+          scraped_at: item.scraped_at
+        }))
+        setTickerNews(newsItems)
+      }
     } catch (error) {
       console.error('티커 뉴스 로드 실패:', error)
     }

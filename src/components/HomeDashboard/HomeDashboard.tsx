@@ -9,6 +9,8 @@ import React, { useState, useEffect } from 'react'
 import type { HomeDashboardProps } from './HomeDashboard.types'
 import type { NewsItem, SourceId } from '../../types/news.types'
 import images from '../../assets/images'
+import { supabase } from '../../config/supabase'
+import type { Database } from '../../types/supabase.types'
 
 const HomeDashboard: React.FC<HomeDashboardProps> = ({
   onCategoryClick: _onCategoryClick,
@@ -30,7 +32,6 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
     setLoading(true)
 
     try {
-      const dateStr = '2025-12-19'
       const categories = ['politics', 'economy', 'society', 'international', 'culture', 'sports']
       const sources: SourceId[] = ['donga', 'chosun', 'joongang']
 
@@ -40,36 +41,48 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
         joongang: []
       }
 
-      // 각 카테고리/신문사 조합에서 첫 번째 뉴스만 가져오기
-      for (const category of categories) {
-        for (const source of sources) {
-          try {
-            const times = ['09-00', '15-00']
-            let _loaded = false
+      // 각 신문사별로 최신 뉴스 가져오기 (모든 카테고리 포함)
+      for (const source of sources) {
+        try {
+          // 각 카테고리에서 최신 뉴스 1개씩 가져오기
+          for (const category of categories) {
+            const { data, error } = await supabase
+              .from('news')
+              .select('*')
+              .eq('source_en', source)
+              .eq('category_en', category)
+              .order('scraped_at', { ascending: false })
+              .limit(1)
 
-            for (const time of times) {
-              const url = `/data/${category}/${source}/news_${dateStr}_${time}.json`
-              const response = await fetch(url)
-
-              if (response.ok) {
-                const news: NewsItem[] = await response.json()
-                if (news.length > 0) {
-                  const article = news[0]
-                  article.category_en = category
-                  article.source_en = source
-                  newspaperNews[source].push(article)
-                  _loaded = true
-                  break
-                }
-              }
+            if (error) {
+              console.error(`Failed to load ${category}/${source}:`, error)
+              continue
             }
-          } catch (error) {
-            console.error(`Failed to load ${category}/${source}:`, error)
+
+            if (data && data.length > 0) {
+              type NewsRow = Database['public']['Tables']['news']['Row']
+              const item = data[0] as NewsRow
+              const newsItem: NewsItem = {
+                title: item.title,
+                url: item.url,
+                date: item.date,
+                category: item.category,
+                category_en: category,
+                source: item.source,
+                source_en: source,
+                image_url: item.image_url || undefined,
+                scraped_at: item.scraped_at
+              }
+              newspaperNews[source].push(newsItem)
+            }
           }
+        } catch (error) {
+          console.error(`Failed to load ${source}:`, error)
         }
       }
 
       setNewsData(newspaperNews)
+      console.log('✅ 홈 대시보드 로드 완료:', newspaperNews)
     } catch (error) {
       console.error('홈 대시보드 로드 실패:', error)
     } finally {

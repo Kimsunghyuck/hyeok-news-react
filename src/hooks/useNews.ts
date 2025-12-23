@@ -53,11 +53,12 @@ export function useNews(
 
     try {
       // Supabase에서 데이터 가져오기
+      // category_en과 source_en 필드를 사용 (영어 값 저장됨)
       const { data, error: supabaseError } = await supabase
         .from('news')
         .select('*')
-        .eq('category', category)
-        .eq('source', source)
+        .eq('category_en', category)
+        .eq('source_en', source)
         .eq('date', date)
         .order('scraped_at', { ascending: false })
 
