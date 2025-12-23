@@ -16,42 +16,53 @@ interface NewsTickerProps {
 
 const NewsTicker: React.FC<NewsTickerProps> = ({ newsItems }) => {
   const swiperRef = useRef<Swiper | null>(null)
-  const isInitialized = useRef(false)
 
   useEffect(() => {
-    // Swiper 초기화 (한 번만)
-    if (newsItems.length > 0 && !isInitialized.current) {
-      // DOM이 준비될 때까지 약간 지연
-      const timer = setTimeout(() => {
-        const swiperElement = document.querySelector('.news-ticker-swiper')
-        if (swiperElement && !swiperRef.current) {
-          swiperRef.current = new Swiper('.news-ticker-swiper', {
-            modules: [Autoplay],
-            direction: 'vertical',
-            loop: true,
-            autoplay: {
-              delay: 3000,
-              disableOnInteraction: false
-            },
-            speed: 500,
-            slidesPerView: 1,
-            spaceBetween: 0
-          })
-          isInitialized.current = true
-        }
-      }, 100)
+    // newsItems가 없으면 아무것도 안 함
+    if (newsItems.length === 0) return
 
-      return () => clearTimeout(timer)
+    // DOM이 준비될 때까지 약간 지연
+    const timer = setTimeout(() => {
+      const swiperElement = document.querySelector('.news-ticker-swiper')
+
+      if (swiperElement) {
+        // 기존 Swiper가 있으면 파괴
+        if (swiperRef.current) {
+          swiperRef.current.destroy(true, true)
+          swiperRef.current = null
+        }
+
+        // 새로운 Swiper 생성
+        swiperRef.current = new Swiper('.news-ticker-swiper', {
+          modules: [Autoplay],
+          direction: 'vertical',
+          loop: newsItems.length > 1, // 1개보다 많을 때만 loop
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false
+          },
+          speed: 500,
+          slidesPerView: 1,
+          spaceBetween: 0,
+          allowTouchMove: false // 마우스/터치로 슬라이드 이동 방지
+        })
+
+        console.log('✅ Swiper 초기화 완료:', newsItems.length, '개 아이템')
+      }
+    }, 150)
+
+    return () => {
+      clearTimeout(timer)
     }
   }, [newsItems])
 
-  // 컴포넌트 언마운트 시에만 정리
+  // 컴포넌트 언마운트 시 정리
   useEffect(() => {
     return () => {
       if (swiperRef.current) {
         swiperRef.current.destroy(true, true)
         swiperRef.current = null
-        isInitialized.current = false
       }
     }
   }, [])
