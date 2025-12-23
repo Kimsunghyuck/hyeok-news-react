@@ -1,0 +1,58 @@
+name: Monthly Data Cleanup
+
+on:
+  schedule:
+    # 매월 1일 00:00 KST 실행 (15:00 UTC 전날 = 00:00 KST)
+    - cron: '0 15 1 * *'
+
+  # 수동 실행 옵션
+  workflow_dispatch:
+    inputs:
+      days:
+        description: '삭제할 기준 일수 (기본: 30일)'
+        required: false
+        default: '30'
+      dry_run:
+        description: '테스트 모드 (실제로 삭제하지 않음)'
+        required: false
+        default: 'false'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+
+      - name: 🧹 Run cleanup script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          cd backend
+          python cleanup.py
+
+      - name: 📊 Summary
+        if: always()
+        run: |
+          echo "✅ Cleanup completed at $(date '+%Y-%m-%d %H:%M:%S')"
+          echo "📅 Next cleanup: 1st day of next month at 00:00 KST"
+          echo "🔍 Check Supabase dashboard for results"
+
+      - name: ❌ Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Cleanup failed! Check logs for details."
+          echo "::warning::Old news data may still exist in database."
