@@ -16,31 +16,45 @@ interface NewsTickerProps {
 
 const NewsTicker: React.FC<NewsTickerProps> = ({ newsItems }) => {
   const swiperRef = useRef<Swiper | null>(null)
+  const isInitialized = useRef(false)
 
   useEffect(() => {
-    // Swiper 초기화
-    if (newsItems.length > 0) {
-      swiperRef.current = new Swiper('.news-ticker-swiper', {
-        modules: [Autoplay],
-        direction: 'vertical',
-        loop: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false
-        },
-        speed: 500,
-        slidesPerView: 1,
-        spaceBetween: 0
-      })
-    }
+    // Swiper 초기화 (한 번만)
+    if (newsItems.length > 0 && !isInitialized.current) {
+      // DOM이 준비될 때까지 약간 지연
+      const timer = setTimeout(() => {
+        const swiperElement = document.querySelector('.news-ticker-swiper')
+        if (swiperElement && !swiperRef.current) {
+          swiperRef.current = new Swiper('.news-ticker-swiper', {
+            modules: [Autoplay],
+            direction: 'vertical',
+            loop: true,
+            autoplay: {
+              delay: 3000,
+              disableOnInteraction: false
+            },
+            speed: 500,
+            slidesPerView: 1,
+            spaceBetween: 0
+          })
+          isInitialized.current = true
+        }
+      }, 100)
 
-    // 정리
-    return () => {
-      if (swiperRef.current) {
-        swiperRef.current.destroy()
-      }
+      return () => clearTimeout(timer)
     }
   }, [newsItems])
+
+  // 컴포넌트 언마운트 시에만 정리
+  useEffect(() => {
+    return () => {
+      if (swiperRef.current) {
+        swiperRef.current.destroy(true, true)
+        swiperRef.current = null
+        isInitialized.current = false
+      }
+    }
+  }, [])
 
   if (newsItems.length === 0) {
     return null
@@ -63,8 +77,8 @@ const NewsTicker: React.FC<NewsTickerProps> = ({ newsItems }) => {
     <div className="news-ticker-banner">
       <div className="swiper news-ticker-swiper">
         <div className="swiper-wrapper">
-          {newsItems.map((item, index) => (
-            <div key={index} className="swiper-slide">
+          {newsItems.map((item) => (
+            <div key={item.url} className="swiper-slide">
               <a
                 href={item.url}
                 target="_blank"
