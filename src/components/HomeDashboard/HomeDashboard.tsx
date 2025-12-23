@@ -8,6 +8,7 @@
 import React, { useState, useEffect } from 'react'
 import type { HomeDashboardProps } from './HomeDashboard.types'
 import type { NewsItem, SourceId } from '../../types/news.types'
+import images from '../../assets/images'
 
 const HomeDashboard: React.FC<HomeDashboardProps> = ({
   onCategoryClick: _onCategoryClick,
@@ -112,9 +113,9 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
   }
 
   const sourceLogos: Record<SourceId, string> = {
-    donga: '/src/assets/images/donga.png',
-    chosun: '/src/assets/images/chosun.png',
-    joongang: '/src/assets/images/joongang.png'
+    donga: images.donga,
+    chosun: images.chosun,
+    joongang: images.joongang
   }
 
   return (

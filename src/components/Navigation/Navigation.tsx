@@ -10,6 +10,7 @@ import classNames from 'classnames'
 import type { NavigationProps } from './Navigation.types'
 import { CATEGORY_NAMES } from '../../types/news.types'
 import type { CategoryId } from '../../types/news.types'
+import logoImage from '../../assets/images/logo.png'
 
 const Navigation: React.FC<NavigationProps> = ({
   activeCategory,
@@ -46,7 +47,7 @@ const Navigation: React.FC<NavigationProps> = ({
               onLogoClick()
             }}
           >
-            <img src="/src/assets/images/logo.png" alt="Hyeok Crawler Logo" />
+            <img src={logoImage} alt="Hyeok Crawler Logo" />
             <span className="logo-text">Hyeok Crawler</span>
           </a>
 

@@ -6,6 +6,7 @@
 
 import React from 'react'
 import type { AuthLandingProps } from './AuthLanding.types'
+import logoImage from '../../assets/images/logo.png'
 
 const AuthLanding: React.FC<AuthLandingProps> = ({
   onSignIn,
@@ -23,7 +24,7 @@ const AuthLanding: React.FC<AuthLandingProps> = ({
       <div className="auth-container">
         {/* 로고 및 타이틀 */}
         <div className="auth-logo">
-          <img src="/src/assets/images/logo.png" alt="Hyeok Crawler Logo" />
+          <img src={logoImage} alt="Hyeok Crawler Logo" />
           <h1>Hyeok Crawler</h1>
           <p className="auth-subtitle">뉴스 크롤러에 오신 것을 환영합니다</p>
         </div>

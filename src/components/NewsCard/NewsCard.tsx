@@ -8,6 +8,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import type { NewsCardProps } from './NewsCard.types'
+import images from '../../assets/images'
 
 const NewsCard: React.FC<NewsCardProps> = ({
   newsItem,
@@ -73,14 +74,14 @@ const NewsCard: React.FC<NewsCardProps> = ({
   const getSourceLogo = (): string => {
     const source = newsItem.source
     const logoMap: Record<string, string> = {
-      '동아일보': '/src/assets/images/donga.png',
-      'donga': '/src/assets/images/donga.png',
-      '조선일보': '/src/assets/images/chosun.png',
-      'chosun': '/src/assets/images/chosun.png',
-      '중앙일보': '/src/assets/images/joongang.png',
-      'joongang': '/src/assets/images/joongang.png'
+      '동아일보': images.donga,
+      'donga': images.donga,
+      '조선일보': images.chosun,
+      'chosun': images.chosun,
+      '중앙일보': images.joongang,
+      'joongang': images.joongang
     }
-    return logoMap[source] || '/src/assets/images/no-image.png'
+    return logoMap[source] || images.noImage
   }
 
   return (
@@ -138,7 +139,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
       {/* 이미지 영역 */}
       <div className="news-card-image-wrapper" onClick={handleCardClick}>
         <img
-          src={newsItem.image_url || '/src/assets/images/no-image.png'}
+          src={newsItem.image_url || images.noImage}
           alt={newsItem.title}
           className="news-card-image"
           onError={handleImageError}

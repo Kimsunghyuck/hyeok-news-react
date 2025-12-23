@@ -16,6 +16,7 @@ import { useNews } from './hooks/useNews'
 import { useAuth } from './hooks/useAuth'
 import type { NewsItem, CategoryId, SourceId } from './types/news.types'
 import { CATEGORY_NAMES, SOURCE_NAMES } from './types/news.types'
+import images from './assets/images'
 
 function App() {
   // 화면 상태
@@ -212,7 +213,7 @@ function App() {
                     {CATEGORY_NAMES[currentCategory]}
                   </span>
                   <img
-                    src={`/src/assets/images/${currentSource}.png`}
+                    src={images[currentSource]}
                     alt={SOURCE_NAMES[currentSource]}
                     style={{ width: '24px', height: '24px', marginLeft: '0.5rem', marginRight: '0.5rem' }}
                   />
