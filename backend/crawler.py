@@ -358,6 +358,9 @@ def crawl_news() -> bool:
                     item['main_category'] = category
                     if 'source' not in item:
                         item['source'] = source_name
+                    # 영문 필드 추가 (Supabase 쿼리용)
+                    item['category_en'] = CATEGORY_EN_MAP.get(category, category.lower())
+                    item['source_en'] = SOURCE_EN_MAP.get(source_name, source_name.lower().replace(' ', '_'))
                 
                 # 4. 기존 뉴스 로드 (소스별)
                 existing_news = load_existing_news_by_source(category, source_name)
