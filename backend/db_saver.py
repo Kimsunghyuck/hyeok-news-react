@@ -117,6 +117,24 @@ def get_news_count_by_date(date: str) -> int:
         return 0
 
 
+def get_total_news_count() -> int:
+    """
+    전체 뉴스 개수 조회
+
+    Returns:
+        전체 뉴스 개수
+    """
+    try:
+        result = supabase.table("news") \
+            .select("id", count="exact") \
+            .execute()
+
+        return result.count if hasattr(result, 'count') else 0
+    except Exception as e:
+        print(f"❌ 뉴스 개수 조회 실패: {e}")
+        return 0
+
+
 def delete_old_news(days: int = 30) -> int:
     """
     오래된 뉴스 삭제 (기본 30일)
