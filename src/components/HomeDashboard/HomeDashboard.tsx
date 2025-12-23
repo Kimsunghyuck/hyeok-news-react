@@ -10,8 +10,8 @@ import type { HomeDashboardProps } from './HomeDashboard.types'
 import type { NewsItem, SourceId } from '../../types/news.types'
 
 const HomeDashboard: React.FC<HomeDashboardProps> = ({
-  onCategoryClick,
-  bookmarkedIds
+  onCategoryClick: _onCategoryClick,
+  bookmarkedIds: _bookmarkedIds
 }) => {
   const [newsData, setNewsData] = useState<Record<SourceId, NewsItem[]>>({
     donga: [],
@@ -44,7 +44,7 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
         for (const source of sources) {
           try {
             const times = ['09-00', '15-00']
-            let loaded = false
+            let _loaded = false
 
             for (const time of times) {
               const url = `/data/${category}/${source}/news_${dateStr}_${time}.json`
@@ -57,7 +57,7 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
                   article.category_en = category
                   article.source_en = source
                   newspaperNews[source].push(article)
-                  loaded = true
+                  _loaded = true
                   break
                 }
               }

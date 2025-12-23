@@ -8,7 +8,6 @@
 import React from 'react'
 import classNames from 'classnames'
 import type { NewsCardProps } from './NewsCard.types'
-import { CATEGORY_NAMES, SOURCE_LOGOS } from '../../types/news.types'
 
 const NewsCard: React.FC<NewsCardProps> = ({
   newsItem,

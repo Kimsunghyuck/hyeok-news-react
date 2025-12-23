@@ -9,7 +9,7 @@ import React, { useState, useRef } from 'react'
 import classNames from 'classnames'
 import type { NavigationProps } from './Navigation.types'
 import { CATEGORY_NAMES } from '../../types/news.types'
-import type { CategoryId, SourceId } from '../../types/news.types'
+import type { CategoryId } from '../../types/news.types'
 
 const Navigation: React.FC<NavigationProps> = ({
   activeCategory,

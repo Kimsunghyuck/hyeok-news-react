@@ -97,6 +97,15 @@ VITE_SUPABASE_ANON_KEY=eyJhbGc...
 - React 앱 정상 실행 확인 (http://localhost:5173)
 - Supabase 클라이언트 초기화 성공
 
+#### ✅ Step 7: GitHub 저장소 설정 및 배포 (2025-12-23 완료)
+- GitHub 저장소 생성: https://github.com/Kimsunghyuck/hyeok-news-react
+- Git 초기화 및 커밋 (260개 파일, 27,129줄)
+- GitHub에 코드 푸시 완료
+- GitHub Secrets 설정 (SUPABASE_URL, SUPABASE_SERVICE_KEY)
+- GitHub Actions 워크플로우 테스트 성공
+- Supabase 패키지 버전 이슈 해결 (2.3.4 → 2.10.0)
+- 자동 크롤링 정상 작동 확인
+
 ---
 
 ## 🗂️ 프로젝트 구조 변경사항

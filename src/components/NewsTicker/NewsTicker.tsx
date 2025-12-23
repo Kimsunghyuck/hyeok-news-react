@@ -8,7 +8,6 @@
 import React, { useEffect, useRef } from 'react'
 import Swiper from 'swiper'
 import { Autoplay } from 'swiper/modules'
-import 'swiper/css'
 import type { NewsItem } from '../../types/news.types'
 
 interface NewsTickerProps {

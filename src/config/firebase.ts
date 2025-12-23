@@ -18,24 +18,16 @@ const firebaseConfig = {
 }
 
 // Firebase 초기화
-let app
-let auth
-let googleProvider
+const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
+const googleProvider = new GoogleAuthProvider()
 
-try {
-  app = initializeApp(firebaseConfig)
-  auth = getAuth(app)
-  googleProvider = new GoogleAuthProvider()
+// 매번 계정 선택 화면 표시
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+})
 
-  // 매번 계정 선택 화면 표시
-  googleProvider.setCustomParameters({
-    prompt: 'select_account'
-  })
-
-  console.log('✅ Firebase initialized successfully')
-} catch (error) {
-  console.error('❌ Firebase initialization failed:', error)
-}
+console.log('✅ Firebase initialized successfully')
 
 export { auth, googleProvider }
 export default app
