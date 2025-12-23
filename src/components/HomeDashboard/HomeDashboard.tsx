@@ -107,15 +107,29 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
     return date.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
   }
 
-  if (loading) {
+  // 스켈레톤 로딩 컴포넌트
+  const renderSkeletonLoading = () => {
+    const sources: SourceId[] = ['donga', 'chosun', 'joongang']
+
     return (
-      <div className="container">
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)' }}>
-            홈 대시보드 로딩 중...
-          </p>
-        </div>
-      </div>
+      <>
+        {sources.map((source) => (
+          <div key={source} className="skeleton-column">
+            <div className="skeleton-header">
+              <div className="skeleton skeleton-logo"></div>
+              <div className="skeleton skeleton-title"></div>
+            </div>
+            {Array(6).fill(0).map((_, index) => (
+              <div key={index} className="skeleton-article">
+                <div className="skeleton skeleton-category"></div>
+                <div className="skeleton skeleton-article-title"></div>
+                <div className="skeleton skeleton-article-title-2"></div>
+                <div className="skeleton skeleton-time"></div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </>
     )
   }
 
@@ -143,7 +157,11 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
         <div className="home-section newspaper-comparison">
           <h2>🗞️ 신문사별 주요 뉴스</h2>
           <div className="comparison-grid" id="newspaper-comparison-grid">
-            {(() => {
+            {loading ? (
+              // 로딩 중: 스켈레톤 표시
+              renderSkeletonLoading()
+            ) : (
+              (() => {
               // 모든 신문사 데이터가 비어있는지 확인
               const totalArticles = Object.values(newsData).reduce((sum, articles) => sum + articles.length, 0)
 
@@ -261,7 +279,8 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
                   </div>
                 )
               })
-            })()}
+              })()
+            )}
           </div>
         </div>
       </div>
