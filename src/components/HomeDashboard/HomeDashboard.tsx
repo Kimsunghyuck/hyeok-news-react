@@ -41,16 +41,22 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
         joongang: []
       }
 
+      // 오늘 날짜의 시작 시간 (00:00:00)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      const todayStart = today.toISOString()
+
       // 각 신문사별로 최신 뉴스 가져오기 (모든 카테고리 포함)
       for (const source of sources) {
         try {
-          // 각 카테고리에서 최신 뉴스 1개씩 가져오기
+          // 각 카테고리에서 오늘 날짜의 최신 뉴스 1개씩 가져오기
           for (const category of categories) {
             const { data, error } = await supabase
               .from('news')
               .select('*')
               .eq('source_en', source)
               .eq('category_en', category)
+              .gte('scraped_at', todayStart)
               .order('scraped_at', { ascending: false })
               .limit(1)
 
