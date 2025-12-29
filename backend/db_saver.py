@@ -87,6 +87,9 @@ def save_news_to_db(news_items: List[Dict[str, Any]]) -> Dict[str, int]:
                 scraped_at_kst = get_kst_now_str()
 
             # 데이터 준비
+            # 모든 타임스탬프를 KST로 명시적 설정
+            kst_now = get_kst_now_str()
+
             data = {
                 "title": item["title"],
                 "url": item["url"],
@@ -96,7 +99,9 @@ def save_news_to_db(news_items: List[Dict[str, Any]]) -> Dict[str, int]:
                 "source": item["source"],
                 "source_en": item.get("source_en"),
                 "image_url": item.get("image_url"),
-                "scraped_at": scraped_at_kst
+                "scraped_at": scraped_at_kst,
+                "created_at": kst_now,  # KST로 명시적 설정
+                "updated_at": kst_now   # KST로 명시적 설정
             }
 
             # Upsert: URL이 같으면 업데이트, 없으면 삽입
