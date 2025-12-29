@@ -52,9 +52,10 @@ export function useNews(
     setError(null)
 
     try {
-      // 선택한 날짜의 시작과 끝 시간 계산
-      const startOfDay = date + 'T00:00:00'
-      const endOfDay = date + 'T23:59:59.999'
+      // 선택한 날짜의 시작과 끝 시간 계산 (KST 기준)
+      // Supabase에 KST로 저장되므로 timezone 명시
+      const startOfDay = date + 'T00:00:00+09:00'
+      const endOfDay = date + 'T23:59:59.999+09:00'
 
       // Supabase에서 데이터 가져오기
       // scraped_at 기준으로 선택한 날짜에 크롤링된 모든 뉴스 조회

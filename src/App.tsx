@@ -44,10 +44,9 @@ function App() {
       const categories = ['politics', 'economy', 'society', 'international', 'culture', 'sports']
       const allNews: NewsItem[] = []
 
-      // 오늘 날짜의 시작 시간 (00:00:00)
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const todayStart = today.toISOString()
+      // 오늘 날짜의 시작 시간 (KST 기준 00:00:00)
+      const todayKST = getTodayKST()
+      const todayStart = todayKST + 'T00:00:00+09:00'
 
       // 각 카테고리에서 오늘 날짜의 최신 뉴스 2-3개씩 가져오기
       for (const category of categories) {

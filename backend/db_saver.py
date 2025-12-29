@@ -1,11 +1,11 @@
 """
 Supabase 데이터베이스 저장 모듈
+모든 날짜/시간은 한국 표준시(KST)로 저장됩니다.
 """
 
 import os
 from supabase import create_client, Client
-from datetime import datetime
-import pytz
+from datetime import datetime, timezone, timedelta
 from typing import List, Dict, Any
 
 # Supabase 설정
@@ -18,8 +18,43 @@ if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
 # Supabase 클라이언트 초기화
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
-# 한국 시간대
-KST = pytz.timezone('Asia/Seoul')
+# 한국 시간대 (KST = UTC+9)
+KST = timezone(timedelta(hours=9))
+
+
+def get_kst_now_str():
+    """
+    현재 한국 시간을 문자열로 반환합니다.
+    ISO 8601 형식, timezone 정보 포함: 2025-12-29T09:00:00+09:00
+    """
+    return datetime.now(KST).isoformat()
+
+
+def parse_scraped_at(scraped_at_str: str) -> str:
+    """
+    scraped_at 문자열을 KST로 변환합니다.
+
+    Args:
+        scraped_at_str: ISO 8601 형식의 날짜/시간 문자열
+
+    Returns:
+        KST timezone을 포함한 ISO 8601 문자열
+    """
+    try:
+        # ISO 형식 파싱
+        dt = datetime.fromisoformat(scraped_at_str.replace('Z', '+00:00'))
+
+        # timezone이 없으면 KST로 간주
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=KST)
+        else:
+            # 다른 timezone이면 KST로 변환
+            dt = dt.astimezone(KST)
+
+        return dt.isoformat()
+    except:
+        # 파싱 실패시 현재 KST 시간 반환
+        return get_kst_now_str()
 
 
 def save_news_to_db(news_items: List[Dict[str, Any]]) -> Dict[str, int]:
@@ -44,6 +79,13 @@ def save_news_to_db(news_items: List[Dict[str, Any]]) -> Dict[str, int]:
 
     for idx, item in enumerate(news_items, 1):
         try:
+            # scraped_at을 KST로 변환
+            scraped_at = item.get("scraped_at")
+            if scraped_at:
+                scraped_at_kst = parse_scraped_at(scraped_at)
+            else:
+                scraped_at_kst = get_kst_now_str()
+
             # 데이터 준비
             data = {
                 "title": item["title"],
@@ -54,7 +96,7 @@ def save_news_to_db(news_items: List[Dict[str, Any]]) -> Dict[str, int]:
                 "source": item["source"],
                 "source_en": item.get("source_en"),
                 "image_url": item.get("image_url"),
-                "scraped_at": item.get("scraped_at", datetime.now(KST).isoformat())
+                "scraped_at": scraped_at_kst
             }
 
             # Upsert: URL이 같으면 업데이트, 없으면 삽입
@@ -145,8 +187,7 @@ def delete_old_news(days: int = 30) -> int:
     Returns:
         삭제된 뉴스 개수
     """
-    from datetime import timedelta
-
+    # KST 기준으로 cutoff 날짜 계산
     cutoff_date = (datetime.now(KST) - timedelta(days=days)).date()
 
     try:
@@ -167,16 +208,17 @@ def delete_old_news(days: int = 30) -> int:
 if __name__ == "__main__":
     # 테스트 코드
     print("🧪 Supabase 연결 테스트...")
+    print(f"현재 KST 시간: {get_kst_now_str()}")
 
     # 테스트 뉴스 저장
     test_news = [{
-        "title": "테스트 뉴스",
+        "title": "테스트 뉴스 (KST)",
         "url": f"https://test.com/{datetime.now().timestamp()}",
         "date": datetime.now(KST).date().isoformat(),
         "category": "정치",
         "source": "테스트",
         "image_url": "https://via.placeholder.com/300x200",
-        "scraped_at": datetime.now(KST).isoformat()
+        "scraped_at": get_kst_now_str()
     }]
 
     save_news_to_db(test_news)

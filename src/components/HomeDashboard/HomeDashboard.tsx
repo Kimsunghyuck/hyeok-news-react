@@ -11,6 +11,7 @@ import type { NewsItem, SourceId } from '../../types/news.types'
 import images from '../../assets/images'
 import { supabase } from '../../config/supabase'
 import type { Database } from '../../types/supabase.types'
+import { getTodayKST } from '../../utils/date'
 
 const HomeDashboard: React.FC<HomeDashboardProps> = ({
   onCategoryClick: _onCategoryClick,
@@ -41,10 +42,9 @@ const HomeDashboard: React.FC<HomeDashboardProps> = ({
         joongang: []
       }
 
-      // 오늘 날짜의 시작 시간 (00:00:00)
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const todayStart = today.toISOString()
+      // 오늘 날짜의 시작 시간 (KST 기준 00:00:00)
+      const todayKST = getTodayKST()
+      const todayStart = todayKST + 'T00:00:00+09:00'
 
       // 각 신문사별로 최신 뉴스 가져오기 (모든 카테고리 포함)
       for (const source of sources) {
