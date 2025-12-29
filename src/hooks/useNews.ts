@@ -52,14 +52,19 @@ export function useNews(
     setError(null)
 
     try {
+      // 선택한 날짜의 시작과 끝 시간 계산
+      const startOfDay = date + 'T00:00:00'
+      const endOfDay = date + 'T23:59:59.999'
+
       // Supabase에서 데이터 가져오기
-      // category_en과 source_en 필드를 사용 (영어 값 저장됨)
+      // scraped_at 기준으로 선택한 날짜에 크롤링된 모든 뉴스 조회
       const { data, error: supabaseError } = await supabase
         .from('news')
         .select('*')
         .eq('category_en', category)
         .eq('source_en', source)
-        .eq('date', date)
+        .gte('scraped_at', startOfDay)
+        .lte('scraped_at', endOfDay)
         .order('scraped_at', { ascending: false })
 
       if (supabaseError) {
