@@ -3,19 +3,11 @@ name: Monthly Data Cleanup
 on:
   schedule:
     # 매월 1일 00:00 KST 실행 (15:00 UTC 전날 = 00:00 KST)
+    # 현재 달 이전의 모든 뉴스 데이터 삭제
     - cron: '0 15 1 * *'
 
   # 수동 실행 옵션
   workflow_dispatch:
-    inputs:
-      days:
-        description: '삭제할 기준 일수 (기본: 30일)'
-        required: false
-        default: '30'
-      dry_run:
-        description: '테스트 모드 (실제로 삭제하지 않음)'
-        required: false
-        default: 'false'
 
 jobs:
   cleanup:
@@ -48,6 +40,7 @@ jobs:
         if: always()
         run: |
           echo "✅ Cleanup completed at $(date '+%Y-%m-%d %H:%M:%S')"
+          echo "📅 현재 달 이전의 모든 뉴스 데이터 삭제 완료"
           echo "📅 Next cleanup: 1st day of next month at 00:00 KST"
           echo "🔍 Check Supabase dashboard for results"
 

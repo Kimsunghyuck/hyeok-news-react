@@ -8,7 +8,7 @@ GitHub Actions를 통해 매월 자동 실행됩니다.
 
 import sys
 from datetime import datetime
-from db_saver import delete_old_news, get_total_news_count
+from db_saver import delete_previous_months_news, get_total_news_count
 
 
 def main():
@@ -24,9 +24,9 @@ def main():
     print(f"📊 정리 전 총 뉴스 개수: {before_count:,}개")
     print()
 
-    # 30일 이상 된 뉴스 삭제
-    print("🗑️  30일 이상 된 뉴스 삭제 중...")
-    deleted_count = delete_old_news(days=30)
+    # 이전 달 뉴스 삭제 (현재 달만 유지)
+    print("🗑️  이전 달 뉴스 삭제 중 (현재 달만 유지)...")
+    deleted_count = delete_previous_months_news()
 
     # 정리 후 데이터 개수 확인
     after_count = get_total_news_count()
@@ -45,7 +45,7 @@ def main():
 
     # 삭제된 항목이 없으면 경고
     if deleted_count == 0:
-        print("⚠️  삭제된 뉴스가 없습니다. 모든 뉴스가 30일 이내입니다.")
+        print("⚠️  삭제된 뉴스가 없습니다. 모든 뉴스가 현재 달 데이터입니다.")
         return 0
 
     return 0

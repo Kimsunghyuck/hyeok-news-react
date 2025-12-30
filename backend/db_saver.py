@@ -210,6 +210,34 @@ def delete_old_news(days: int = 30) -> int:
         return 0
 
 
+def delete_previous_months_news() -> int:
+    """
+    현재 달을 제외한 모든 이전 달의 뉴스 삭제
+    매월 1일 실행을 권장합니다.
+
+    Returns:
+        삭제된 뉴스 개수
+    """
+    # KST 기준 현재 날짜
+    now_kst = datetime.now(KST)
+    current_month_start = now_kst.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()
+
+    try:
+        result = supabase.table("news") \
+            .delete() \
+            .lt("date", str(current_month_start)) \
+            .execute()
+
+        deleted_count = len(result.data) if result.data else 0
+        print(f"🗑️ {current_month_start} 이전 (이전 달) 뉴스 {deleted_count}개 삭제 완료")
+        print(f"📅 현재 {now_kst.year}년 {now_kst.month}월 데이터만 유지됩니다.")
+
+        return deleted_count
+    except Exception as e:
+        print(f"❌ 뉴스 삭제 실패: {e}")
+        return 0
+
+
 if __name__ == "__main__":
     # 테스트 코드
     print("🧪 Supabase 연결 테스트...")
