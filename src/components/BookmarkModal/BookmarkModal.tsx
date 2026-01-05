@@ -184,7 +184,7 @@ const BookmarkModal: React.FC<BookmarkModalProps> = ({
                         {bookmark.category}
                       </span>
                       <span className="news-card-date">
-                        {formatDate(bookmark.date)}
+                        작성일: {formatDate(bookmark.date)}
                       </span>
                     </div>
                     <h3 className="news-card-title">{bookmark.title}</h3>

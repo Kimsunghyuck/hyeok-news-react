@@ -252,7 +252,7 @@ function App() {
                 </h2>
               </div>
               <div className="date-selector-controls">
-                <label htmlFor="date-select">날짜 선택:</label>
+                <label htmlFor="date-select">스크랩 날짜:</label>
                 <input
                   type="date"
                   id="date-select"

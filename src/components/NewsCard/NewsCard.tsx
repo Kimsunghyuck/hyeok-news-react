@@ -172,7 +172,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
             {newsItem.category || newsItem.main_category}
           </span>
           <span className="news-card-date">
-            {formatDate(newsItem.date)}
+            작성일: {formatDate(newsItem.date)}
           </span>
         </div>
         <h3 className="news-card-title">{newsItem.title}</h3>
